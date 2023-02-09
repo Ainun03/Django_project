@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% load humanize %}
+{% block content %}
+</br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Products</h5>
+            </div>
+            <div class="card card-body">
+                <table class="table">
+                    <tr>
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for dataproduct in product %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ dataproduct.name }}</td>
+                            <td>{{ dataproduct.category }}</td>
+                            <td>Rp. {{ dataproduct.price|intcomma}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

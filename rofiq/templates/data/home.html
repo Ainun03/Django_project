@@ -1,0 +1,171 @@
+{% extends "main.html" %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+{% include "data/status.html" %}
+
+<br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5">
+            <h5>CUSTOMERS:</h5>
+            <hr>
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_custumer' %}">Create Customer</a>
+                <table class="table table-sm">
+                    <tr>
+                        <th>No.</th>
+                        <th>Action</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                    {% for datacustumer in custumer %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'custumer' datacustumer.id %}" class="btn btn-outline-success btn-sm">View</a></td>
+                        <td>{{ datacustumer.name }}</td>
+                       <td>{{ datacustumer.phone }}</td>
+                       <td><a href="{% url 'update_custumer' datacustumer.id %}" class="btn btn-success">Update</a></td>
+                       <td><a href="{% url 'delete_custumer' datacustumer.id %}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h5>LAST 5 ORDERS</h5>
+            <hr>
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block" href="{% url 'create_order' %}">Create Order</a>
+                <table class="table table-sm">
+                    <tr>
+                        <th>No.</th>
+                        <th>Product</th>
+                        <th>Date Orderd</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                    {% for dataorder in order %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ dataorder.product }}</td>
+                            <td>
+                              {{ dataorder.date_created|date:"l, d N Y" }}
+                              {{ dataorder.date_created|time:"H:i:s" }}
+                            </td>
+                            <td>{{ dataorder.status }}</td>
+                            <td><a href="{% url 'update_order' dataorder.id %}" class="btn btn-success">Update</a></td>
+                            <td><a href="{% url 'delete_order' dataorder.id %}" class="btn btn-danger">Delete</a></td>
+                       </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-md-5 ">
+                <img class="w-100" src="{% static '/images/faq.png' %}" id="logo">
+            </div>
+            <div class=" col-md-7">
+                <h5>PANDUAN PMB UNY 2021</h5>
+                <h3>Frequently Asked Questions (FAQ)</h3>
+                <div class="accordion  accordion-flush" id="accordionFlushExample">
+                    <div class=" accordion-item">
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                         Alur Pendaftaran
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>1. Membuat Akun PPDB</p>
+                            <p>2. Lengkapi Data</p>
+                            <p>3. Unggah Berkas</p>
+                            <p>4. Membayar Pendaftaran</p>
+                            <p>5. Ikut Seleksi</p>
+                            <p>6. Pengumuman Seleksi</p>
+                            <p>7. Daftar Ulang</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                          Dokumen yang disiapkan
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <h5>Seleksi CBT:</h5>
+                            (1) Kartu Identitas (2) Foto (3) Ijazah/SKL (4) Data Sekolah (5) Data Sosial Ekonomi
+                            <h5>Seleksi Prestasi/Portofolio:</h5>
+                            (1) Kartu Identitas (2) Foto (3) Ijazah/SKL (4) Data Sekolah (5) Data Sosial Ekonomi (6) Raport (7) Piagam/Prestasi
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                          Biaya Pendaftaran
+                        </button>
+                      </h2>
+                      <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>1. Pendaftaran D4 & S1 semua jalur <span class="fw-bold">Rp. 153.000</span> </p>
+                            <p>2. Pendaftaran Program Magister semua jalur <span class="fw-bold">Rp. 153.000</span></p>
+                            <p>3. Pendaftaran Program Doktor semua jalur <span class="fw-bold">Rp. 153.000</span></p>
+                            <p>Pembayaran dapat dilakukan di bank mitra semua channel pembayaran:</p>
+                            
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                          Jalur Pendaftaran 
+                        </button>
+                      </h2>
+                      <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>1. Reguler </p>
+                            <p>2. Beasiswa Tahfidz Al-Qur'an</p>
+                            <p>3. Beasiswa Prestasi Akademik</p>
+                            <p>4. Beasiswa Penelusuran Minat & Kemampuan (PMDK)</p>
+                            <p>5. Beasiswa Aktif Organisasi</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                          Panduan Pemabayaran
+                        </button>
+                      </h2>
+                      <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <h5>Melalui ATM Bersama/ATM Non BNI :</h5>
+                            <p>1. Masukkan kartu ke mesin ATM bersama</p>
+                            <p>2. Pilih Transaksi Lainnya</p>
+                            <p>3. Pilih menu Transfer</p>
+                            <p>4. Pilih Transfer ke Bank Lain</p>
+                            <p>5. Masukkan kode bank BNI (009) dan 16 Digit kode pembayaran (contoh:<span class="fw-bold">0098798012020012941</span>) </p>
+                            <p>6. Masukkan nominal transfer pembayaran (contoh :<span class="fw-bold">Rp. 153.000</span>)</p>
+                            <p>7. Konfirmasi, Akan muncul nama pendaftar dan Jumlah Pembayarannya, Jika sesuai tekan 'Ya' untuk melanjutkan</p>
+                            <p>8. Transaksi berhasil</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    {% endblock content %}

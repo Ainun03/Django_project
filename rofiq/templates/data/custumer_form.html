@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br>
+<div class="container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <div class="card card-body">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                        {{ formcus|crispy }}
+                        {% comment %} <label for="name">Nama: </label>
+                        <br/>
+                        <input id="your_name" type="text" name="your_name" value="{{ custumer.name }}">
+                        <br/>
+                        <label for="email">Email: </label>
+                        <br/>
+                        <input id="email" type="email" name="email" value="{{ custumer.email }}">
+
+                        
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Save"/> {% endcomment %}
+                    <br>
+                    <input type="submit" class="btn btn-primary" value="Save"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
